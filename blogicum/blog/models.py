@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from .constans import max_len
+from .managers import PublishedManager
+
 
 User = get_user_model()
 
@@ -49,6 +51,8 @@ class Category(BaseModel):
 
 
 class Post(BaseModel):
+    objects = models.Manager()
+    published = PublishedManager()
     title = models.CharField(max_length=max_len, verbose_name='Заголовок')
     text = models.TextField(verbose_name='Текст')
     pub_date = models.DateTimeField(
