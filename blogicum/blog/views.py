@@ -31,7 +31,7 @@ def category_posts(request, category_slug):
     category = get_object_or_404(
         Category, slug=category_slug, is_published=True
     )
-    post_list = category.cat.all().filter(
+    post_list = category.categorized_records.all().filter(
         is_published=True, pub_date__lte=timezone.now()
     )
     context = {'post_list': post_list, 'category': category}
